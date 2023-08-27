@@ -1,4 +1,7 @@
 
+# Concepts
+
+[[Consistent Hashing]]
 
 
 # Case Studies
