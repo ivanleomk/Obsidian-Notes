@@ -8,7 +8,8 @@
 
 Here are some case studies where we try to follow the [[System Design Interview Framework]]
 
-[[Design A Rate Limiter]]
+1. [[Design A Rate Limiter]]
+2. [[Design A Key-Value Store]]
 
 # Components of An Application
 
