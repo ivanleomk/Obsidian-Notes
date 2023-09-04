@@ -1,5 +1,5 @@
 ---
-title: Welcome to Ivan's notes
+title: Home Page
 ---
 
 Here are some notes for things I'm working through
@@ -9,3 +9,4 @@ Here are some notes for things I'm working through
 - [[Byte Byte Go Course]]
 - [[Zero To Hero]] by Andrej Karpathy
 - [[CS25 - Stanford Seminar]]
+- [[The Definitive Guide to Celery and FastAPI]]
