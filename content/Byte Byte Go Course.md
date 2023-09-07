@@ -12,8 +12,8 @@ Here are some case studies where we try to follow the [[System Design Interview 
 3. [[Design a Unique ID Generator for a Distributed System]]
 4. [[Design a URL Shortener]]
 5. [[Design a Web Crawler]]
-
-
+6. [[Design a Notification System]]
+7. [[Design a News Feed]]
 
 # Components of An Application
 
