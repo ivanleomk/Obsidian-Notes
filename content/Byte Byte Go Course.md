@@ -14,6 +14,7 @@ Here are some case studies where we try to follow the [[System Design Interview 
 5. [[Design a Web Crawler]]
 6. [[Design a Notification System]]
 7. [[Design a News Feed]]
+8. [[Design a Chat System]]
 
 # Components of An Application
 
