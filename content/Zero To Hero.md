@@ -72,23 +72,88 @@ Karpathy outlines two ways to create these Bigram models
 
 2. **Neural Networks** : We initialise a network with roughly equal weights at the start and use stochastic gradient descent to slowly arrive at the same probabilities that we obtained in our manual counts process
 
-However, if we use neural networks, we will get back a vector of random real numbers. We can interpret these weights as log counts and then exponentiate the numbers to make them positive. These can then be normalised to create a probability distribution to sample from.
+## Neural Network Approach
 
-For example, if we have the first character of `a` , then we can encode it as a vector of 
+Using a bigram model is intuitive because we have a list of $j$ counts that we can then convert to probabilities by 
+$$
+c_{i} = \frac{c_i}{\sum_{j=0}^n c_{j}}
+$$
 
-```
-[1,0,0....] # assuming we have 27 possible chars ( including a end char )
-```
+How then can we obtain the same effect using neural networks? On a high level, we can do so using a single Neuron
 
-We can mimic a randomly assigned log counts by initialising a 27 x 27 matrix with random weights. This will be 
+### Neuron
 
-```
-eg. 
+A neuron in a neural network simply takes in a vector as input and spits out a vector as input using the formula 
 
-[
-[]
-]
-```
+$$
+y = W\times X + b
+$$
+
+Where $W$ is the weights of the network and $b$ the bias of the neuron. We can think of the weights and biases as knobs we can tune in order to get the final result we want
+
+### Neurons and Bigrams
+
+There's a small problem with $y$. It's that 
+
+1. It doesn't sum to 1 nicely
+2. It has some negative numbers from time-to-time 
+
+What we want is a vector with $j$ values that sum to 1 nicely so we can make a prediction using a multinomial prediction. Therefore, we can solve this by simply doing
+
+$$
+y_{i}\prime =  \frac{e^{y_{i}}}{\sum_{j=0}^ne^{y_{j}}} 
+$$
+
+So, what we want is a slightly modified form of y. So, what then can we compare $X$, $W$ and $b$ to?
+
+- X is going to be a one-hot encoded value for the first character of the bigram (Eg. we chose a `a`, what are the respective probabilities for `ab`,`aa` and so on? )
+- W is going to be a randomly initialised set of values that range from $-\infty\to\infty$, since our counts originally ranged from $0 \to \infty$ , we can simply consider $W$ as our log counts since the log function takes positive numbers and then maps them to the same range that $W$ occupies
+
+### Loss Function
+
+All that's missing now is a [[Loss Function]]. This is a function which is used to measure the quality of our model's predictions. **The better the prediction, the lower the loss should be**
+
+Ideally, if we choose the wrong character, we want the probability to be 0. If we've chosen the right character, we want the probability to be 1. Therefore, we want a function which can do this given the probability of the respective character we've predicted in $y$.
+
+We are going to use the [[Negative Log Likelihood]] of the generated probability of the right choice as a loss function because
+
+1. If our model knows exactly what is going to be next, it will assign a probability of 1.
+2. If our model has zero information, then everything will be equally likely - so prob will be 1/27
+3. Probabilities are solely from 0 to 1
+4. Log(1) = 0 , log(0) = -inf therefore the range of each value will be -inf <= x <= 0
+5. -log(1) = 0, -log(0) = inf, therefore as model becomes more accurate, our loss tends to 0
+
+### Batch Size
+
+We can now train our model! Some key concepts here to consider when training our model are 
+
+1. **Batch Size**: We don't want to pass the entire dataset when we train the model, therefore we utilise a subset of the dataset when doing the forward pass and the back propagation.
+   
+2. **Model Smoothing**: When we train our model, we want our weights to be small to prevent overfitting. Therefore, we can modify our loss function to favour smaller weights using an additional term of $\epsilon \times w.mean()$ 
+   
+# Multi Layer Perceptron
+
+A Multi Layer Perceptron is a neural net with an input layer, one or more hidden layers and an output layer. In our case, we increase the context size from 2 to 3 to create a new prediction layer. 
+
+![[Pasted image 20230910000224.png | 400]]
+
+## Embeddings
+
+Instead of mapping our characters to probabilities, we utilise [[embeddings]]. These are real number vectors used to represent semantic meaning that our model learns over the course of its training. it also means that we can be more flexible in our block size, potentially increasing the context length by utilising a larger vector of concatenated embeddings.
+
+## Hyper-parameter tuning
+
+We can utilise hyper parameter tuning as a way for us to explore the entire training set to find an efficient learning rate to train our model with. Remember that the learning rate is the amount that we adjust our model's weights by.
+
+There are three main ways that we can do so
+
+1. **Learning Rate Decay** : We can decay our model's learning rate over time so that we do not have such major updates. 
+   
+2. **Learning Rate Exploration** : We can run small experiments whereby we iteratively increase the learning rate with each epoch. This allows us to see roughly how changes in the learning rate can affect the loss of our model. 
+   
+3. **Train, Test and Validation**: We can also split up our dataset into a train , test and validation set. This is useful because with enough epochs, our model will start to memorize the data it has been given. Therefore, we hold out a bit of the data in the form of a **validation** set. If our model has roughly the same performance on the validation and training set, then it probably hasn't overfitted on the data yet.
+
+
 
 # Building GPT
 
