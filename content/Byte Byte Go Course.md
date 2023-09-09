@@ -15,6 +15,7 @@ Here are some case studies where we try to follow the [[System Design Interview 
 6. [[Design a Notification System]]
 7. [[Design a News Feed]]
 8. [[Design a Chat System]]
+9. [[Design a Search Autocomplete System]]
 
 # Components of An Application
 

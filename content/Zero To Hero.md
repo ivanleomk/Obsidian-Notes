@@ -72,9 +72,23 @@ Karpathy outlines two ways to create these Bigram models
 
 2. **Neural Networks** : We initialise a network with roughly equal weights at the start and use stochastic gradient descent to slowly arrive at the same probabilities that we obtained in our manual counts process
 
-However, if we use neural networks, we will get back a vector of random real numbers, how can we then map these back into the concept of counts ( in step 1 ) and consequently probabilities. 
+However, if we use neural networks, we will get back a vector of random real numbers. We can interpret these weights as log counts and then exponentiate the numbers to make them positive. These can then be normalised to create a probability distribution to sample from.
 
-## Log 
+For example, if we have the first character of `a` , then we can encode it as a vector of 
+
+```
+[1,0,0....] # assuming we have 27 possible chars ( including a end char )
+```
+
+We can mimic a randomly assigned log counts by initialising a 27 x 27 matrix with random weights. This will be 
+
+```
+eg. 
+
+[
+[]
+]
+```
 
 # Building GPT
 
