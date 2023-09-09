@@ -2,14 +2,20 @@
 title: Home Page
 ---
 
-Here are some notes for things I'm working through
+Hey there! My name is Ivan and I'm currently a software engineer who's trying to teach myself machine learning on the side. Here's a growing list of the notes which I've taken on the topic - I've also added in some simple system design notes and software stuff since they all sort of come together.
 
-**Courses**
+**Courses I am doing**
 
 - [[Byte Byte Go Course]]
-- [[Zero To Hero]] by Andrej Karpathy
 - [[CS25 - Stanford Seminar]]
 - [[The Definitive Guide to Celery and FastAPI]]
+
+**Finished Courses**
+
+- [[Zero To Hero]] by Andrej Karpathy
+- [[Grokking Algorithms]] by Aditya Y. Bhargava
+
+**Potentially In The Future**
 
 Here are some resource which I find interesting but haven't gotten around to working on yet
 
