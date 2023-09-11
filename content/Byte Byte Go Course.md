@@ -16,6 +16,7 @@ Here are some case studies where we try to follow the [[System Design Interview 
 7. [[Design a News Feed]]
 8. [[Design a Chat System]]
 9. [[Design a Search Autocomplete System]]
+10. [[Design Youtube]]
 
 # Components of An Application
 

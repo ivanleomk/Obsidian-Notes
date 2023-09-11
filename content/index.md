@@ -7,7 +7,6 @@ Hey there! My name is Ivan and I'm currently a software engineer who's trying to
 **Courses I am doing**
 
 - [[Byte Byte Go Course]]
-- [[CS25 - Stanford Seminar]]
 - [[The Definitive Guide to Celery and FastAPI]]
 
 **Finished Courses**
@@ -24,3 +23,8 @@ Here are some resource which I find interesting but haven't gotten around to wor
 - [[Lewis Lin System Design]]
 - [[Stanley Chiang System Design]]
 
+I need to work a bit more on Machine learning
+- https://cs231n.github.io/convolutional-networks/
+- [[CS25 - Stanford Seminar]]
+- https://www.deeplearningbook.org/
+- 
