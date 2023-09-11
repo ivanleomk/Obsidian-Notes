@@ -192,5 +192,172 @@ def mergesort(arr):
 
 # Hash Functions
 
-Hash functions help us map inputs to a unique output.
+Hash functions help us map inputs to a unique output. We can use this to construct a hash table which is a mapping of a string -> integer to map an array index to a unique key.
 
+When we get a hash collision, then we end storing the values in a linked list at that specific index. This means that if the outputs of our hash function are not uniformly distributed, then we end up with long lookups that are going to take significantly longer than $O(1)$.
+
+![[CleanShot 2023-09-11 at 13.52.28.png]]
+
+When we look at a hash table, we look at the **load factor** to determine the amount of space it has remaining. We can calculate the load factor by taking
+
+$$
+\frac{\text{number of items in hash table}}{\text{total number of slots}}
+$$
+
+When our hash table starts getting full, then we want to resize our hash table to have more slots. Typically, we'd want to shoot for around double the original number of slots. 
+
+# Graphs
+
+Graphs are just a collection of nodes and edges. A node is connected to other nodes by edges - which might have a direction or weight attached to it.
+
+## Representations
+
+We can implement nodes in two main ways
+
+1. **Adjacency Matrix** : For a graph with $n$ nodes, we can represent it using an adjacency matrix of $n\times n$ size. The value at the matrix at $i,j$ simply represents the weight of the edge between $i$ and $j$. 
+   
+2. 2.**Adjacency List**: This is probably the most common one, whereby we represent each graph in a hash table that is then mapped to a list of its neighbors
+
+
+
+
+![[CleanShot 2023-09-11 at 13.57.42.png]]
+## Breadth First Search
+
+Breadth first search helps to answer the questions
+
+- Is there a path from A to B
+- What is the shortest path from A to B
+
+Breadth-First Search (BFS) involves processing items in a queue - which is a First in, First Out (FIFO) structure. We can perform a BFS search by
+
+1. Adding a node
+2. Adding its children
+3. Processing the nodes in the order they are added
+
+We can also use BFS as a means to generate a topological sort of a graph. This is a way to make an ordered list out of a graph. 
+
+![[CleanShot 2023-09-11 at 15.33.31.png]]
+
+In this case, our topological sort might look like
+
+```
+[wake up, exercise, pack lunch, brush teeth, shower, eat breakfast, get dressed]
+```
+
+The most important thing here is that each node will appear before all the nodes it points to (Eg. **exercise** will always appear before **shower**). Other than that, the ordering doesn't matter so much. 
+
+## Dijkstra's Algorithm
+
+Djikstra's algorithm helps us to find the shortest path between any two nodes in a weighted graph network. This means that in a network with graphs where edges have weights associated to them, we can find the shortest path using the algorithm. 
+
+**Note** : Djikstra's algorithm only works with **directed acyclic graphs with positive weights** where a cycle does not exist. This is because we could potentially follow a cycle infinitely and never get the shortest path
+
+![[CleanShot 2023-09-11 at 15.38.59.png]]
+
+Djikstra simply works by 
+
+1. Look at all the nodes that we have so far and choose the node with the shortest travel distance. 
+   
+2. Set the node as visited ( so we don't consider it again ) - we have now found the shortest travel distance to this node
+   
+3. Loop through all the node's neighbours and see if we have now found a shorter path to a new node using this new explored node. 
+   
+4. Repeat until all nodes have been explored 
+
+We can implement djikstra using a heap as seen below
+
+```python
+import heapq
+
+def dijkstra(graph, start):
+    distances = {}
+    priority_queue = [(0, start)]
+
+    while priority_queue:
+        current_distance, current_node = heapq.heappop(priority_queue)
+      
+        if current_node in distances:
+          continue
+        distances[current_node] = current_distance
+        for neighbor, weight in graph[current_node].items():
+            distance = current_distance + weight
+            # Unprocessed Node
+            if neighbor not in distances:
+                heapq.heappush(priority_queue, (distance, neighbor))
+
+    return distances
+
+
+test_graph = {
+    'A': {'B': 1, 'C': 4},
+    'B': {'A': 1, 'C': 2, 'D': 5},
+    'C': {'A': 4, 'B': 2, 'D': 1},
+    'D': {'B': 5, 'C': 1}
+}
+
+test_cases = [
+    ('A', {'A': 0, 'B': 1, 'C': 3, 'D': 4}),
+    ('B', {'A': 1, 'B': 0, 'C': 2, 'D': 3}),
+    ('C', {'A': 3, 'B': 2, 'C': 0, 'D': 1}),
+    ('D', {'A': 4, 'B': 3, 'C': 1, 'D': 0})
+]
+
+for start_node, expected_distances in test_cases:
+    result = dijkstra(test_graph, start_node)
+    assert result == expected_distances, f"Expected {expected_distances}, but got {result}"
+```
+
+# Greedy Algorithms
+
+Greedy algorithms are algorithms we can use to approximate a globally optimal solution. In short, **we pick the locally optimal solution and in the end we're left with the globally optimal solution**.
+
+Sometimes, greedy algorithms aren't able to find the globally optimal solution but they allow us to get close enough. Often times, greedy algorithms will find a solution in $O(n^2)$ time while a complete solution will take around $O(n!)$ time.
+
+These are a class of problems known as [[NP-Complete]].
+
+
+# Dynamic Programming
+
+When thinking about dynamic programming, the goal is to identify the subproblem. Each cell in the dp table that we create is going to correspond to some subproblem of the larger problem we are trying to solve.
+## Knapsack Problem
+
+Knapsack problems are when we have a bunch of choices that have an associated cost $x$ and we want to optimise for a specific quantity $Y$. 
+
+![[CleanShot 2023-09-11 at 20.01.10.png]]
+![[CleanShot 2023-09-11 at 20.01.59.png]]
+We will have to modify this approach if we wanted to get the maximum amounts for each individual item.
+
+## Longest Common Substring
+
+If we have two strings `eg.Hish` and `Fish`, the longest common substring is going to be `ish`. How can we then compute the longest common substring?
+
+Well, if we think about it, the answer is really
+
+```
+max(HIS,FIS) + 1
+```
+
+since `hish` and `fish` both end with a `h`. 
+
+If we're trying to find the longest string between two strings that don't share the same last character, eg. `power` and `twerk`, then the problem really is
+
+```
+max(power,twer) vs max(powe,twerk)
+```
+
+![[CleanShot 2023-09-11 at 20.07.11.png | 400]]
+
+## Longest Common Subsequence
+
+How about if we want to get the longest common substring - eg. `ace` and `abcde` have the longest common substring of `ace`. 
+
+if the last character `e` matches, then it really is the question of what is the longest common substring of `ac` and `abcd`. This can then be decomposed into 
+
+```
+max(a,abcd) vs max(ac,abc)
+```
+
+Since the last char matches, then we want to 
+
+![[CleanShot 2023-09-11 at 20.11.17.png]]
