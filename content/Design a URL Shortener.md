@@ -9,7 +9,7 @@ Before we start designing the system, it's important to start by generating some
 
 In short, we have the following features
 
-- The ability to redirect users given a shortened url - (Eg. [tinyurl.xx/shortened_url]() ) to the original url
+- The ability to redirect users given a shortened url - (Eg. tinyurl/shortened_url ) to the original url
 - The ability to generate a shortened url given a original url which is unique
 
 Of course, we need to make sure that we have a highly available, scalable and fault tolerant considerations. ( Assume that we will be generating ~ 100 million urls per day )
