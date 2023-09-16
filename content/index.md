@@ -9,8 +9,7 @@ I've also started reading some [[Papers]] on machine learning if you'd like to c
 **Courses I am doing**
 
 - [[Byte Byte Go Course]]
-- [[Grokking Deep Learning]] by Andrew Trask
-
+- [[Stanford Introduction To Statistics ]]
 
 **Finished Courses**
 
@@ -21,7 +20,7 @@ I've also started reading some [[Papers]] on machine learning if you'd like to c
 
 ## Abandoned
 
-- - [[The Definitive Guide to Celery and FastAPI]] : I have abandoned this for now. I think the instructor has a very production heavy build in mind with a lot of boilerplate which is overkill for my usage for now.
+- [[The Definitive Guide to Celery and FastAPI]] : I have abandoned this for now. I think the instructor has a very production heavy build in mind with a lot of boilerplate which is overkill for my usage for now.
 - 
 
 **Potentially In The Future**

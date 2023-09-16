@@ -19,6 +19,9 @@ Here are some case studies where we try to follow the [[System Design Interview 
 10. [[Design Youtube]]
 11. [[Design Google Drive]]
 12. [[Design Proximity Service]]
+13. [[Design Nearby Friends]]
+
+
 
 # Components of An Application
 
