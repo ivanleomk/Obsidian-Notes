@@ -72,12 +72,7 @@ We also want to store user's historical location data. This is a write-heavy wor
 
 However, since the scale of our app is quite significant, we cannot utilise the database directly. 
 
-A data model for our location history is 
-
-- userId
-- lat
-- long
-- timestamp
+A data model for our location history is `userId,lat,long,timestamp`.
 
 ## Websockets
 
