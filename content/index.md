@@ -9,19 +9,19 @@ I've also started reading some [[Papers]] on machine learning if you'd like to c
 **Courses I am doing**
 
 - [[Byte Byte Go Course]]
-- [[Stanford Introduction To Statistics ]]
+
 
 **Finished Courses**
 
 - [[Zero To Hero]] by Andrej Karpathy
 - [[Grokking Algorithms]] by Aditya Y. Bhargava
-
+- [[Stanford Introduction To Statistics ]]
 
 
 ## Abandoned
 
 - [[The Definitive Guide to Celery and FastAPI]] : I have abandoned this for now. I think the instructor has a very production heavy build in mind with a lot of boilerplate which is overkill for my usage for now.
-- 
+
 
 **Potentially In The Future**
 
