@@ -36,7 +36,10 @@ I need to work a bit more on Machine learning
 - https://cs231n.github.io/convolutional-networks/
 - [[CS25 - Stanford Seminar]]
 - https://www.deeplearningbook.org/
+- https://slds-lmu.github.io/seminar_nlp_ss20/index.html
 
 Here are some resources on good ml papers to look through
 - https://github.com/aimerou/awesome-ai-papers
 - https://github.com/google-research/tuning_playbook
+- https://nn.labml.ai/
+- 
