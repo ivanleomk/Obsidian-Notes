@@ -21,6 +21,8 @@ Here are some case studies where we try to follow the [[System Design Interview 
 12. [[Design Proximity Service]]
 13. [[Design Nearby Friends]]
 14. [[Design Google Maps]]
+15. [[Design a Message Queue]]
+
 
 
 # Components of An Application
