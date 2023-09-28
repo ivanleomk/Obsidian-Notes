@@ -4,7 +4,7 @@ tags : #anthropic #llm  #rlhf
 
 Constitutional AI is a mechanism used to train LLMs that was proposed by [[Anthropic AI]] in December 2022 to help train their Claude model. It tries to use a series of guiding principles to guide models to produce outputs that are helpful and non-evasive.
 
-These guiding principles are known as Constituitions and are listed in the paper at the end.
+These guiding principles are known as Constitutions and are listed in the paper at the end.
 
 
 > The following is an example taken from the paper.
@@ -18,7 +18,9 @@ On a high level, this is achieved by training our model on data derived from a d
 
 1. **SL-CAI Model** : We first train a model to generate critiques in accordance to specific guidelines ( these are known as constitutions ). 
    
-2. **Preference Model** : SL-CAI model is then used to generate responses to the harmful prompts by generating preference ranking (Eg. between A and B, which do you prefer - please generate an explanation )
+2. **Reward Model** : SL-CAI model is then used to generate responses to the harmful prompts by generating preference ranking (Eg. between A and B, which do you prefer - please generate an explanation ) in the form of a normalised probability distribution
+   
+3.  **Preference Model** : Using the reward model, we then train a preference model which is able to assign a scalar score from 0 -> 1 for any generated response.
    
 3. **RL-CAI model** : Once we have a preference model that can score and evaluate different prompts, we then proceed to use this to fine-tune a model using reinforcement learning. This produces a model they call RL-CAI 
 
@@ -70,7 +72,7 @@ A revision request is a single sentence that asks the model to generate a new re
 > Revision Request: Revise the assistant’s response so as to refrain from giving legally questionable or dangerous advice.
 
 The main idea here is that as we provide more context to the model, we'll be able to get more helpful and harmless responses over time. 
-
+![[CleanShot 2023-09-28 at 02.23.44.png | 600]]
 ### Fine-Tune with Supervision
 
 They then utilise the new responses that we have created in order to fine-tune a model to create what they term a SL-CAI model ( Supervised Learning - Constitutional AI). This separates the process from traditional supervised learning which would have utilised human crowd workers to generate these responses.
@@ -92,10 +94,10 @@ A few things to note about the dataset
 The goal in reinforcement learning is for our model to iteratively work towards generating better outputs. They do so by 
 
 1. Training a reward model which can compare two responses to a prompt and return a normalized probability dist over the two options.
-2. Using the reward model to train a preference to assign a score to any response
+2. Using the reward model to train a preference model to assign a score to any response
 3. Using this reward model to train our LLM to generate better responses
 
-Note : Human feedback is only used for helpfulness. The harmlessness labels are generated using the reward model.
+Note : Human feedback is only used for helpfulness. The harmlessness labels are generated using the reward model. (? : Not too sure what this might mean )
 
 ### Training a Reward Model
 
@@ -112,7 +114,6 @@ Options:
 (B) [RESPONSE B]
 The answer is:
 ```
-
 
 Some sample principles were
 
@@ -135,6 +136,8 @@ def reward_model(response_a,response_b) : -> [float,float]
 ```
 
 where `[float,float]` must sum up to 1 since they are normalised probabilities. 
+
+> Interestingly, they used few shot examples when training the reward model which contained independently sampled principles, a pre-written prompt and reward pair.
 
 ### Preference Model
 
@@ -169,4 +172,10 @@ Beyond pure technical functionality, the Constitutional AI (CAI) method is likel
 
 > We found that critiqued revisions achieved better harmlessness scores for small models, but made no noticeable different for large models. Furthermore, based on inspecting samples from the 52B, we found that the critiques were sometimes reasonable, but often made inaccurate or overstated criticisms.
 > 
-> Page 10 - section 3.5
+> Page 10 - section 3.5'
+
+
+## Other Potential Areas
+
+- **Bai et al, 2022** : You can use a generic OOD detection technique to reject most strange and harmful requests ( A potential firewall of sorts? )
+- 

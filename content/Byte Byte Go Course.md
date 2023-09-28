@@ -22,6 +22,7 @@ Here are some case studies where we try to follow the [[System Design Interview 
 13. [[Design Nearby Friends]]
 14. [[Design Google Maps]]
 15. [[Design a Message Queue]]
+16. [[Design a Metrics Monitoring and Alerting System]]
 
 
 
