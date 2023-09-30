@@ -10,6 +10,7 @@ I've also started reading some [[Papers]] on machine learning if you'd like to c
 
 - [[Byte Byte Go Course]]
 - [[Introduction To Linear Algebra]]
+- [[Neural Networks From Scratch]]
 
 **Finished Courses**
 

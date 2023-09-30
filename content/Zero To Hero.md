@@ -204,6 +204,10 @@ a@x'.T = [1,1.5,2]
 
 A good way to think about the query and key vector is that of attention. We want to be able to obtain a matrix which tells each token how much to weight previous tokens (Eg. A vowel might want to look for a consonant)
 
+$$
+1 + 2 + 3 + \dots + n = \frac{n(n+1)}{2} 
+$$
+
 ![[CleanShot 2023-09-07 at 19.47.08.png | 400]]
 In short
 
