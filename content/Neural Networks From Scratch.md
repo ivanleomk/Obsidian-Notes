@@ -84,3 +84,90 @@ When we look at the dot product, we need to make sure the dimensions agree. In t
 More concretely, when performing the dot product of two matrices, the dimensions that must agree are the number of columns in the first matrix and the number of rows in the second matrix. Specifically, if the first matrix has dimensions m × n, and the second matrix has dimensions n × p, then the dot product (matrix multiplication) is defined, and the resulting product matrix will have dimensions m × p
 
 > Dot products are useful in batch inference since we can parallelise the inference step for multiple samples in a single operation.
+
+
+# Neural Network basics
+
+## Activation Functions
+
+We use activation functions in order to allow our neural networks to map to non-linear outputs. This is because, if we had no activation functions, we would essentially have a giant linear output.
+
+![[Pasted image 20231001100842.png | 500]]
+
+There are a few common activation functions to know
+
+### Step Function
+
+![[Screenshot 2023-10-01 at 10.12.55 AM.png | 400]]
+A step function introduces a simple non-linearity and decides if a neuron if firing or not. However, it's a bit too non-granular for our uses since we can't really adjust the degree of firing
+
+### Sigmoid
+
+![[Screenshot 2023-10-01 at 10.16.28 AM.png]]
+
+This is slightly better since we have a gradual increase in the firing rate of the neuron. Note that in this context, all values still lie between 0 and 1.
+
+### ReLU
+
+ReLU is very simple to compute, hence why it ended up replacing the sigmoid function in the future
+![[Screenshot 2023-10-01 at 10.17.20 AM.png | 400]]
+
+## Softmax
+
+Softmax activation function is commonly used to normalise probabilities. 
+
+![[Pasted image 20231001110507.png | 300]]
+
+We can see an implementation below in numpy
+
+```python
+class Activation_Softmax:
+  def forward(self,inputs):
+    exp_values = np.exp(inputs - np.max(inputs,axis=1,keepdims=True)) # Numerical Stability
+
+    probs = exp_values / np.sum(exp_values,axis=1,keepdims=True)
+
+    self.output = probs
+    return probs
+```
+
+Since `exp` is a monotonically increasing function, we can prevent numerical instability by taking the max of the values and subtracting it from each value. The final value of the softmax will be the same and we avoid potential integer overflows.
+## Loss
+
+The loss function is an algorithm which determines how well the model's predictions are working. Ideally we want it to be 0, and the more errors the model makes, the higher it should be.
+
+### Categorical Loss
+
+We can utilise the categorical cross entropy loss when we are dealing with multi-class classification problems.
+
+$$
+L_{i} = -\sum_{i=0}^j y_{i}log(\hat{y}_{i})
+$$
+
+Where $L_i$ denotes the sample loss value, $i$ the $i$-th sample in a set of $j$ possible classes, $y$ the target prediction value and $\hat{y}$ the predicted value.
+
+Note that when we have a single class, this simply becomes the negative log likelihood.
+
+$$
+L_i = -log(\hat{y_{i}})
+$$
+
+Since all other probabilities are going to be multiplied by 0. Normally, we clip the values by a small amount (Eg. 1e-7, 1-1e-7) so that we don't run into integer overflow since `log(0)` is going to be infinity.
+
+```python
+class Loss_CategoricalCrossentropy(Loss):
+  def forward(self,y_pred,y_true):
+    samples = len(y_pred)
+    y_pred_clipped = np.clip(y_pred,1e-7,1-1e-7)
+    if len(y_true.shape) == 1:
+      correct_confidence = y_pred_clipped[range(samples),y_true]
+    else:
+      correct_confidence = np.sum(
+          y_pred_clipped*y_true,
+          axis=1
+      )
+    
+    negative_log_likelihood = -np.log(correct_confidence)
+    return negative_log_likelihood
+```
+

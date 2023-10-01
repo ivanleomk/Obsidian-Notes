@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "7f3eb5548d5a970c",
+        "id": "0eeaef5a9ddf87e2",
         "type": "tabs",
         "children": [
           {
-            "id": "b81223e4aba30d26",
+            "id": "0bc317114ef77df3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -146,24 +146,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b81223e4aba30d26",
+  "active": "0bc317114ef77df3",
   "lastOpenFiles": [
+    "Assets/Pasted image 20231001110507.png",
+    "Assets/Screenshot 2023-10-01 at 10.17.20 AM.png",
+    "Assets/Screenshot 2023-10-01 at 10.16.28 AM.png",
+    "Assets/Screenshot 2023-10-01 at 10.15.39 AM.png",
+    "Assets/Screenshot 2023-10-01 at 10.12.55 AM.png",
+    "Assets/Pasted image 20231001100842.png",
+    "index.md",
+    "Introduction To Linear Algebra.md",
+    "Neural Networks From Scratch.md",
     "Assets/Pasted image 20230930235103.png",
     "Assets/Pasted image 20230930234305.png",
     "Assets/Pasted image 20230930233849.png",
-    "index.md",
-    "Neural Networks From Scratch.md",
     "RWKV Reinventing RNNs For The Transformer Era.md",
     "Assets/Forgetfullness.png",
     "Assets/Channel_Mixing.png",
-    "Assets/Time_Mixing_Block.png",
-    "Assets/time_mixing_eqn.png",
     "Transformer.md",
-    "Assets/Scaling_RWKV.png",
     "Zero To Hero.md",
     "LLama 2.md",
-    "CS25 - Stanford Seminar.md",
-    "Introduction To Linear Algebra.md",
-    "Assets/Screenshot 2023-09-28 at 8.03.22 PM.png"
+    "CS25 - Stanford Seminar.md"
   ]
 }
