@@ -23,6 +23,9 @@ Here are some case studies where we try to follow the [[System Design Interview 
 14. [[Design Google Maps]]
 15. [[Design a Message Queue]]
 16. [[Design a Metrics Monitoring and Alerting System]]
+17. [[Ad Click Event Aggregation]]
+18. [[Hotel Reservation System]]
+19. [[Design a Email System]]
 
 
 
